@@ -1,0 +1,17 @@
+<html>
+<link href="stylesheets/styles.css" rel="stylesheet"/>
+<title>Group Limerick App</title>
+  <body>
+    <% if session[:message] %>
+      <p class="splash-message"><%= session.delete(:message) %></p>
+    <% end %>
+    <%= yield %>
+    <% if session[:game_data] %>
+      <div>
+        <h3>Debugging info:</h3>
+        <p>Player Name: <%= session[:player_name] %></p>
+        <p>Game Data: <%= session[:game_data].inspect %></p>
+      </div>
+    <% end %>
+  </body>
+</html>
