@@ -6,7 +6,9 @@
       <p class="splash-message"><%= session.delete(:message) %></p>
     <% end %>
     <%= yield %>
-    <% if session[:game_data] %>
+
+<%# Debugging Info: %>
+    <% if session[:game_data]%>
       <div>
         <h3>Debugging info:</h3>
         <p>Player Name: <%= session[:player_name] %></p>

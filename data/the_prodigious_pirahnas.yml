@@ -1,9 +1,9 @@
 ---
-:group_name: One
+:group_name: The Prodigious Pirahnas
 :group_size: '5'
 :players:
 - Owen
-- Joe
+- Steve
 :limericks:
 - &1 []
 - *1

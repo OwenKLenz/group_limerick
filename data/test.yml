@@ -1,12 +1,9 @@
 ---
 :group_name: test
-:group_size: '5'
+:group_size: '2'
 :players:
 - owen
-- steve
+- owen2
 :limericks:
 - &1 []
-- *1
-- *1
-- *1
 - *1

@@ -12,7 +12,7 @@ require 'pry'
 require 'psych'
 
 GROUP_NAMES = ["The Prodigious Pirahnas", "The Incontenent Ibexes", "The Salacious Salamanders"]
-
+LINES_IN_A_LIMERICK = 5
 configure do
   enable :sessions
 
@@ -69,6 +69,14 @@ def update_gamefile(game_data)
   updated_data = YAML.dump(game_data)
   File.write(File.join(game_save_dir, acquire_gamefile_name), updated_data)
 end
+# Game logic
+def all_limericks_completed?
+  limericks.all? { |limerick| limerick.size == LINES_IN_A_LIMERICK }
+end
+
+def player_line_not_done?
+
+end
 
 # Game data getters
 def limericks
@@ -80,7 +88,7 @@ def players
 end
 
 def group_size
-  session[:game_data][:group_size]
+  session[:game_data][:group_size].to_i
 end
 
 def group_name
@@ -155,13 +163,28 @@ post "/join" do
 end
 
 get "/play" do
-  erb :waiting_for_players
+  if players.size < group_size
+    erb :waiting_for_players
+  else
+    # load_latest_game_data
+    if limericks_completed?
+      erb :finished_limericks
+    elsif player_line_not_done?
+      erb :line_entry
+    else
+      erb :jeopardy_theme
+    end
+  end
   # Done in GameEngineClass?
   # IF players < group_size, display "Waiting for players"
   # IF limericks_completed, display all limericks
   # IF player_line_not_submitted, display line entry form with all submitted lines displayed above
   # IF all_player_lines_not_submitted, display "waiting for other players"
   # ELSE (all lines submitted) load next limerick for player
+end
+
+post "/submit" do
+  # Update game data and cycle limericks if needed
 end
 
 # New Game:

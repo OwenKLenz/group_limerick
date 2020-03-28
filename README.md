@@ -1,9 +1,9 @@
 # Group Limerick
 
 ### Preface
-This is my first attempt at crafting an original web application. The back end is built Ruby using the Sinatra framework and the front end is built with with my underdeveloped skills in HTML and CSS.
+This is my first attempt at crafting an original web application. The back end is built in Ruby using the Sinatra framework and the front end is built with with my underdeveloped skills in HTML and CSS.
 
-I'm building this while sheltering in place during the COVID-19 pandemic and my hope it is that the game might be a fun diversion for family and friends during these difficult times.
+I'm building this while sheltering in place during the COVID-19 pandemic and my hope is that the game might be a fun diversion for family and friends during these difficult times.
 
 ### What is a limerick?
 As defined on [literarydevices.net](http://literarydevices.net/limerick):
@@ -12,7 +12,7 @@ As defined on [literarydevices.net](http://literarydevices.net/limerick):
 - The bawdier and more uncouth, the better.
 
 ### What is Group Limerick?
-A delightful game that can be played with 2-5 people. Each person concocts the first line of a limerick and then passes the limerick to the person next to them. This process repeats until the limerick is finished at which point the results are read aloud and heary laughs are shared.
+A delightful game that can be played with 2-5 people. Each person concocts the first line of a limerick and then passes the limerick to the person next to them. This process repeats until the limerick is finished, at which point the results are read aloud and hearty laughs are shared.
 
 ### Implementing Group Limerick as a web app
 Coming soon...
