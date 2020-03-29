@@ -63,9 +63,9 @@ class GroupLimerickTest < MiniTest::Test
   def test_create_new_game
     create_test_game
 
-    assert_equal group_name, "Test Group 1"
+    assert_equal game_data.group_name, "Test Group 1"
     assert_equal session[:player_name], "test player"
-    assert_equal group_size, "5"
+    assert_equal game_data.group_size, 5
 
     assert File.file?(File.join(game_save_dir, "test_group_1.yml"))
     assert_equal session[:message], "Test Group 1 created!"
@@ -78,6 +78,7 @@ class GroupLimerickTest < MiniTest::Test
 
     post "/join", { player_name: "Joe", group_name: "Test Group 1" }
     assert_includes last_response.body, "\"Test Group 1\" is already full."
+    assert_equal 422, last_response.status
 
     # Test joining with empty player name
     create_test_game(group_name: "Test Group 2", player_name: "test player", group_size: 2)

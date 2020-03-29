@@ -11,8 +11,13 @@ require 'tilt/erubis'
 require 'pry'
 require 'psych'
 
-GROUP_NAMES = ["The Prodigious Pirahnas", "The Incontenent Ibexes", "The Salacious Salamanders"]
+require_relative "lib/game_data"
+
+GROUP_NAMES = ["The Prodigious Pirahnas",
+               "The Incontenent Ibexes",
+               "The Salacious Salamanders"]
 LINES_IN_A_LIMERICK = 5
+
 configure do
   enable :sessions
 
@@ -27,19 +32,29 @@ def game_save_dir
   end
 end
 
-def generate_limericks(number)
-  Array.new(number, ["", "", "", "", ""])
-end
-
 def create_gamefile
   gamefile = File.new(File.join(game_save_dir, acquire_gamefile_name), 'w')
-  limericks = Array.new(params[:group_size].to_i, [])
-  game_data = { group_name: params[:group_name],
-                group_size: (params[:group_size]),
-                players: [params[:player_name]],
-                limericks: limericks }
-  YAML.dump(game_data, gamefile, indentation: 2)
+ 
+  raw_game_data = { group_name: params[:group_name],
+                    group_size: (params[:group_size].to_i),
+                    players: [params[:player_name]],
+                    limericks: [Limerick.new] }
+  YAML.dump(raw_game_data, gamefile, indentation: 2)
   gamefile.close
+end
+
+def invalid_join?(raw_game_data)
+  if empty_player_name?
+    session[:message] = "Player names must be one or more characters."
+  elsif raw_game_data[:players].size >= raw_game_data[:group_size].to_i
+    session[:message] = "The group \"#{raw_game_data[:group_name]}\" is "\
+                        "already full. No new players may join."
+  end
+end
+
+def set_session_data
+  session[:game_data] = GameData.new(params[:group_name], params[:player_name])
+  session[:message] = "Welcome #{game_data.player_name}}!"
 end
 
 def acquire_gamefile_name
@@ -47,8 +62,8 @@ def acquire_gamefile_name
   game_name.downcase.gsub(" ", "_") + ".yml"
 end
 
-def acquire_group_name(game_filename)
-  File.basename(game_filename, ".yml").gsub("_", " ").split(" ").map(&:capitalize).join(" ")
+def acquire_group_name(gamefile_name)
+  File.basename(gamefile_name, ".yml").gsub("_", " ").split(" ").map(&:capitalize).join(" ")
 end
 
 def invalid_group_name?
@@ -65,34 +80,9 @@ def empty_player_name?
   end
 end
 
-def update_gamefile(game_data)
-  updated_data = YAML.dump(game_data)
-  File.write(File.join(game_save_dir, acquire_gamefile_name), updated_data)
-end
-# Game logic
-def all_limericks_completed?
-  limericks.all? { |limerick| limerick.size == LINES_IN_A_LIMERICK }
-end
-
-def player_line_not_done?
-
-end
-
-# Game data getters
-def limericks
-  session[:game_data][:limericks]
-end
-
-def players
-  session[:game_data][:players]
-end
-
-def group_size
-  session[:game_data][:group_size].to_i
-end
-
-def group_name
-  session[:game_data][:group_name]
+# Game data getter
+def game_data
+  session[:game_data]
 end
 
 helpers do
@@ -117,11 +107,11 @@ end
 
 post "/new_game" do
   if invalid_group_name? || empty_player_name?
+    status 422
     erb :new_game 
   else
     create_gamefile
-    game_data = load_gamefile
-    load_session_data(game_data)
+    set_session_data
     session[:message] = "#{params[:group_name]} created!"
     redirect "/play"
   end
@@ -131,60 +121,52 @@ get "/join" do
   erb :join_game
 end
 
-def invalid_join?(game_data)
-  if empty_player_name?
-    session[:message] = "Player names must be one or more characters."
-  elsif game_data[:players].size >= game_data[:group_size].to_i
-    session[:message] = "The group \"#{game_data[:group_name]}\" is already "\
-                        "full. No new players may join."
-  end
-end
-
-def load_session_data(game_data)
-  session[:game_data] = game_data
-  session[:player_name] = params[:player_name]
-  session[:message] = "Welcome #{session[:player_name]}!"
-end
-
 post "/join" do
-  game_data = load_gamefile
+  raw_game_data = load_gamefile
 
-  if game_data[:players].include?(params[:player_name])
-    load_session_data(game_data)
+  if raw_game_data[:players].include?(params[:player_name])
+    set_session_data
     redirect "/play"
-  elsif invalid_join?(game_data)
+  elsif invalid_join?(raw_game_data)
+    status 422
     erb :join_game
   else
-    load_session_data(game_data)
-    players << params[:player_name]
-    update_gamefile(game_data)
+    GameData.add_player(params[:player_name], params[:group_name])
+    set_session_data
+
     redirect "/play"
   end
 end
 
 get "/play" do
-  if players.size < group_size
+  game_data.refresh
+
+  if game_data.players.size < game_data.group_size
     erb :waiting_for_players
   else
-    # load_latest_game_data
-    if limericks_completed?
+    if game_data.all_limericks_complete?
       erb :finished_limericks
-    elsif player_line_not_done?
+    elsif !game_data.line_done?
       erb :line_entry
     else
       erb :jeopardy_theme
     end
   end
-  # Done in GameEngineClass?
-  # IF players < group_size, display "Waiting for players"
-  # IF limericks_completed, display all limericks
-  # IF player_line_not_submitted, display line entry form with all submitted lines displayed above
-  # IF all_player_lines_not_submitted, display "waiting for other players"
-  # ELSE (all lines submitted) load next limerick for player
+
+# Each player submits line
+# all line_completed are true
+
+# if a player has submitted their line, 
+#   all lines will be identifiable as completed once all limericks are the same size
+# At that point, set line_completed to false
+# Rinse and repeat until all limericks length at 5
 end
+
 
 post "/submit" do
   # Update game data and cycle limericks if needed
+  # Set line completed to true
+  redirect "/play"
 end
 
 # New Game:

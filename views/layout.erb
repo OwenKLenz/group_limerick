@@ -11,8 +11,11 @@
     <% if session[:game_data]%>
       <div>
         <h3>Debugging info:</h3>
-        <p>Player Name: <%= session[:player_name] %></p>
-        <p>Game Data: <%= session[:game_data].inspect %></p>
+        <p><strong>Player Name:</strong> <%= session[:player_name] %></p>
+        <p><strong>Game Data:</strong></p>
+        <div>
+          <%= game_data.to_s %></p>
+        </div>
       </div>
     <% end %>
   </body>

@@ -7,6 +7,10 @@ class Limerick
     @lines.size == 5
   end
 
+  def <<(line)
+    @lines << line
+  end
+
   def to_s
     @lines.join("\n")
   end

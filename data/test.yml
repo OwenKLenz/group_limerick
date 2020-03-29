@@ -1,9 +1,20 @@
 ---
 :group_name: test
-:group_size: '2'
+:group_size: 5
 :players:
 - owen
-- owen2
+- al
+- Stevo
+- r
+- Stevo
 :limericks:
-- &1 []
-- *1
+- !ruby/object:Limerick
+  lines: []
+- !ruby/object:Limerick
+  lines: []
+- !ruby/object:Limerick
+  lines: []
+- !ruby/object:Limerick
+  lines: []
+- !ruby/object:Limerick
+  lines: []
