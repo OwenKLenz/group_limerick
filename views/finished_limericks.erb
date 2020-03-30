@@ -1,0 +1,5 @@
+<h2>Finished Limericks</h2>
+<% game_data.limericks.each.with_index do |limerick, index| %>
+  <h3>Started by <%= game_data.players[index] %></h3>
+  <p><em><%== limerick %></em></p>
+<% end %>

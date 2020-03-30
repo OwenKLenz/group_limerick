@@ -1,0 +1,22 @@
+---
+:group_name: test3
+:group_size: 2
+:players:
+- Owen
+- Steve
+:limericks:
+- !ruby/object:Limerick
+  lines:
+  - a
+  - a
+  - a
+  - a
+  - a
+- !ruby/object:Limerick
+  lines:
+  - a
+  - a
+  - a
+  - a
+  - a
+:current_line: 6

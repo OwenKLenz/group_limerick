@@ -1,5 +1,5 @@
 ---
-:group_name: test
+:group_name: test2
 :group_size: 2
 :players:
 - Owen
@@ -8,15 +8,15 @@
 - !ruby/object:Limerick
   lines:
   - 'There once was a man from Bel Air '
-  - Who danced the fandango on skates
-  - 'But a fall on his cutlass '
-  - Has rendered him nutless
+  - Who was doing his wife on the stair
+  - 'But the banister broke '
+  - 'So he doubled his stroke '
   - And finished her off in mid-air
 - !ruby/object:Limerick
   lines:
   - 'There was a young sailor named Bates '
-  - 'Who was doing his wife on the stair '
-  - 'But the banister broke '
-  - 'So he doubled his stroke '
+  - Who danced the fandango on skates
+  - 'But a fall on his cutlass '
+  - Has rendered him nutless
   - And practically useless on dates.
 :current_line: 6

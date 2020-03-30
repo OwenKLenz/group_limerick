@@ -27,7 +27,7 @@ class GroupLimerickTest < MiniTest::Test
     last_request.env["rack.session"]
   end
 
-  def create_test_game(group_name: "Test Group 1", player_name: "test player", group_size: 5)
+  def create_test_game(group_name: "Test Group 1", player_name: "test player", group_size: 2)
     post "/new_game", { group_name: group_name, player_name: player_name, group_size: group_size }
   end
 
@@ -64,8 +64,8 @@ class GroupLimerickTest < MiniTest::Test
     create_test_game
 
     assert_equal game_data.group_name, "Test Group 1"
-    assert_equal session[:player_name], "test player"
-    assert_equal game_data.group_size, 5
+    assert_equal game_data.player_name, "test player"
+    assert_equal game_data.group_size, 2
 
     assert File.file?(File.join(game_save_dir, "test_group_1.yml"))
     assert_equal session[:message], "Test Group 1 created!"
@@ -99,5 +99,28 @@ class GroupLimerickTest < MiniTest::Test
     post "/join", { group_name: "Test Group 1", player_name: "test player" }
     assert_equal last_response.status, 302
     assert_equal "Welcome test player!", session[:message]
+  end
+
+  def test_nav_bar
+    get "/"
+    assert_includes last_response.body, '~ <a href="/new_game">New Game</a>'
+
+    get "/join"
+    assert_includes last_response.body, '~ <a href="/new_game">New Game</a>'
+  end
+
+  def test_waiting_for_more_players
+    create_test_game
+    get last_response["Location"]
+
+    assert_includes last_response.body, "1 of 2 players have joined"
+  end
+
+  def test_line_entry_form
+    create_test_game
+    post "/join", { group_name: "Test Group 1", player_name: "test player 2" }
+
+    get last_response["Location"]
+    assert_includes last_response.body, "Enter first line:"
   end
 end

@@ -1,6 +1,20 @@
 class Limerick
+  include Enumerable
+
   def initialize
     @lines = []
+  end
+
+  def each
+    return @lines unless block_given?
+
+    @lines.each do |line|
+      yield(line)
+    end
+  end
+
+  def size
+    @lines.size
   end
 
   def complete?
@@ -12,6 +26,6 @@ class Limerick
   end
 
   def to_s
-    @lines.join("\n")
+    @lines.join("<br>")
   end
 end

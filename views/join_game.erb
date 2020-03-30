@@ -2,9 +2,9 @@
 <form action="/join" method="post">
   <div>
     <label for="group_name">Available Games:</label>
-    <select name="group_name">
+    <select id="group_name" name="group_name">
       <% active_games.each do |game| %>
-        <option value="<%= game %>"><%= game %></option>
+        <option value="<%= game %>" <%= set_selected(game) %>><%= game %></option>
       <% end %>
     </select>
   </div>

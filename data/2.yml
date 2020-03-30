@@ -1,0 +1,22 @@
+---
+:group_name: '2'
+:group_size: 5
+:players:
+- owen
+- hi
+- sldf
+- Alfred
+- Frank
+:limericks:
+- !ruby/object:Limerick
+  lines:
+  - stuff
+- !ruby/object:Limerick
+  lines: []
+- !ruby/object:Limerick
+  lines: []
+- !ruby/object:Limerick
+  lines: []
+- !ruby/object:Limerick
+  lines: []
+:current_line: 1

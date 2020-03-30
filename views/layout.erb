@@ -2,19 +2,22 @@
 <link href="stylesheets/styles.css" rel="stylesheet"/>
 <title>Group Limerick App</title>
   <body>
+  <nav>
+    <p>~ <a href="/">Home</a> ~ <a href="/new_game">New Game</a> ~ <a href="/join">Join Game</a> ~ <a href="/rules">Rules</a> ~</p>
+  </nav>
     <% if session[:message] %>
-      <p class="splash-message"><%= session.delete(:message) %></p>
+      <p class="splash-message"><%== session.delete(:message) %></p>
     <% end %>
-    <%= yield %>
+    <%== yield %>
 
 <%# Debugging Info: %>
     <% if session[:game_data]%>
-      <div>
+      <div class="debugging">
         <h3>Debugging info:</h3>
-        <p><strong>Player Name:</strong> <%= session[:player_name] %></p>
+        <p><strong>Player Name:</strong> <%== game_data.player_name %></p>
         <p><strong>Game Data:</strong></p>
         <div>
-          <%= game_data.to_s %></p>
+          <%== game_data.to_s %></p>
         </div>
       </div>
     <% end %>

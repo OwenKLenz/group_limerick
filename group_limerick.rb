@@ -1,7 +1,25 @@
+# Todo:
+
+  # Rules Page
+
+#   Reload button
+
+#   deleting finished games
+#     Need a way to track when all players have seen limericks
+
+#   Copyright
+
+#   Styling and generally sprucing things up
+
+#   Look into Jquery features (autoreloading?, Hiding completed limericks)
+
+
+
 # Potential Features
   # Deleting players
   # Passwords to enter games? (probably unnecessary)
   # Changing names
+  # Displaying who came up with which line?
 
 require 'bundler/setup'
 require 'sinatra'
@@ -13,15 +31,20 @@ require 'psych'
 
 require_relative "lib/game_data"
 
-GROUP_NAMES = ["The Prodigious Pirahnas",
-               "The Incontenent Ibexes",
-               "The Salacious Salamanders"]
-LINES_IN_A_LIMERICK = 5
+GROUP_NAMES = ["test", "test"]
+# ["The Prodigious Pirahnas",
+#                "The Incontenent Ibexes",
+#                "The Salacious Salamanders"]
+
+LINE_NAMES = %w(first second third fourth fifth)
+LINES_IN_A_LIMERICK = 2
 
 configure do
   enable :sessions
 
   set :session_secret, "secret"
+
+  set :erb, :escape_html => true
 end
 
 def game_save_dir
@@ -38,7 +61,8 @@ def create_gamefile
   raw_game_data = { group_name: params[:group_name],
                     group_size: (params[:group_size].to_i),
                     players: [params[:player_name]],
-                    limericks: [Limerick.new] }
+                    limericks: [Limerick.new],
+                    current_line: 1 }
   YAML.dump(raw_game_data, gamefile, indentation: 2)
   gamefile.close
 end
@@ -52,13 +76,21 @@ def invalid_join?(raw_game_data)
   end
 end
 
-def set_session_data
-  session[:game_data] = GameData.new(params[:group_name], params[:player_name])
-  session[:message] = "Welcome #{game_data.player_name}}!"
+def empty_line?
+  if params[:new_line].empty?
+    session[:message] = "What do you think you're doing? You can't submit an "\
+                        "empty line! Try reading the "\
+                        "<a href='/rules'>rules</a> you nincompoop!"
+  end
 end
 
-def acquire_gamefile_name
-  game_name = params[:group_name] || group_name
+def set_session_data
+  session[:game_data] = GameData.new(params[:group_name], params[:player_name])
+  session[:message] = "Welcome #{game_data.player_name}!"
+end
+
+  def acquire_gamefile_name
+    game_name = params[:group_name] || game_data.group_name
   game_name.downcase.gsub(" ", "_") + ".yml"
 end
 
@@ -80,7 +112,6 @@ def empty_player_name?
   end
 end
 
-# Game data getter
 def game_data
   session[:game_data]
 end
@@ -93,6 +124,29 @@ helpers do
   def active_games
     Dir.glob("*", base: game_save_dir).map do |filename|
       acquire_group_name(filename)
+    end
+  end
+
+  def set_selected(game)
+    "selected" if game == params[:group_name]
+  end
+
+  def unfinished_players
+    game_data.players.select.with_index do |player, index|
+      game_data.limericks[index].size < game_data.current_line
+    end
+  end
+
+  def format_unfinished_players
+    waiting_on = unfinished_players
+
+    case waiting_on.size
+    when 1
+      waiting_on.first + " is"
+    when 2
+     waiting_on.join(" and ") + " are"
+    else
+      waiting_on[0..-2].join(", ") + " and " + waiting_on[-1] + " are"
     end
   end
 end
@@ -131,9 +185,9 @@ post "/join" do
     status 422
     erb :join_game
   else
-    GameData.add_player(params[:player_name], params[:group_name])
     set_session_data
-
+    game_data.add_player(params[:player_name], params[:group_name])
+    game_data.refresh
     redirect "/play"
   end
 end
@@ -146,27 +200,24 @@ get "/play" do
   else
     if game_data.all_limericks_complete?
       erb :finished_limericks
-    elsif !game_data.line_done?
+    elsif !game_data.current_line_submitted?
       erb :line_entry
-    else
+    else # Waiting on other players
       erb :jeopardy_theme
     end
   end
-
-# Each player submits line
-# all line_completed are true
-
-# if a player has submitted their line, 
-#   all lines will be identifiable as completed once all limericks are the same size
-# At that point, set line_completed to false
-# Rinse and repeat until all limericks length at 5
 end
 
 
 post "/submit" do
-  # Update game data and cycle limericks if needed
-  # Set line completed to true
-  redirect "/play"
+  if empty_line?
+    status 422
+    erb :line_entry
+  else
+    game_data.add_line(params[:new_line])
+    game_data.cycle_limericks if game_data.all_player_lines_submitted?
+    redirect "/play" 
+  end
 end
 
 # New Game:

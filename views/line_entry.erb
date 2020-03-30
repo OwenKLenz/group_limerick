@@ -1,0 +1,11 @@
+<h2>Current Limerick</h2>
+<div>
+  <% game_data.current_limerick.each do |line| %>
+    <p><%= line %><p>
+  <% end %>
+</div>
+<form action="/submit" method="post">
+  <label for="new_line">Enter <%= LINE_NAMES[game_data.current_limerick.size] %> line:</label>
+  <input type="text" id="new_line" name="new_line"/>
+  <button type="submit">Submit</button>
+</form>
