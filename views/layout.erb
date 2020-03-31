@@ -1,17 +1,20 @@
 <html>
 <link href="stylesheets/styles.css" rel="stylesheet"/>
+<script src="/javascripts/jquery-3.4.1.js"></script>
+<script src="/javascripts/application.js"></script>
 <title>Group Limerick App</title>
   <body>
-  <nav>
-    <p>~ <a href="/">Home</a> ~ <a href="/new_game">New Game</a> ~ <a href="/join">Join Game</a> ~ <a href="/rules">Rules</a> ~</p>
-  </nav>
+    <nav>
+      <p>~ <a class="nav-item" href="/">Home</a> ~ <a class="nav-item" href="/new_game">New Game</a> ~ <a class="nav-item" href="/join">Join Game</a> ~ <a class="nav-item" href="/rules">Rules</a> ~</p>
+    </nav>
     <% if session[:message] %>
       <p class="splash-message"><%== session.delete(:message) %></p>
     <% end %>
     <%== yield %>
-
+    <hr>
+    <p>&#169; <a href="https://github.com/OwenKLenz" target="top">Owen Kevra-Lenz</a> 2020</p>
 <%# Debugging Info: %>
-    <% if session[:game_data]%>
+    <% if false%>
       <div class="debugging">
         <h3>Debugging info:</h3>
         <p><strong>Player Name:</strong> <%== game_data.player_name %></p>
@@ -23,3 +26,20 @@
     <% end %>
   </body>
 </html>
+
+<script>
+  $(document).ready(
+    function() {
+      $('.nav-item').mouseenter(
+        function() {
+          $(this).css({color:'green'});
+          // $(this).fadeIn(300);
+        )
+        handlerOut(
+          function() {
+            $(this).css({color:'red'});
+            // $(this).fadeIn(300);
+        );
+      });
+  });
+</script>

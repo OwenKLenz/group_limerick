@@ -22,6 +22,7 @@ GEM
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rake (13.0.1)
+    redcarpet (3.5.0)
     ruby2_keywords (0.0.2)
     sinatra (2.0.8.1)
       mustermann (~> 1.0)
@@ -47,6 +48,7 @@ DEPENDENCIES
   pry-byebug
   rack-test
   rake
+  redcarpet
   sinatra
   sinatra-contrib
 

@@ -1,9 +1,0 @@
----
-:group_name: owen
-:group_size: 2
-:players:
-- owen
-:limericks:
-- !ruby/object:Limerick
-  lines: []
-:current_line: 1

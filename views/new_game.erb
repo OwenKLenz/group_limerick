@@ -8,7 +8,7 @@
   </div>
   <div>
     <label for="total_players">How many people are playing? (Max: 5)</label>
-      <input type="number" id="total_players" step="1" name="group_size" size="2" max="5" min="2" value="2" required>
+      <input type="number" id="total_players" step="1" name="group_size" size="2" max="5" min="2" value="<%= params[:group_size] || 2 %>" required>
     </label>
   </div>
   <div>

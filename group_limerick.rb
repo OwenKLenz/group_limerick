@@ -1,19 +1,7 @@
 # Todo:
-
-  # Rules Page
-
-#   Reload button
-
-#   deleting finished games
-#     Need a way to track when all players have seen limericks
-
-#   Copyright
-
 #   Styling and generally sprucing things up
 
 #   Look into Jquery features (autoreloading?, Hiding completed limericks)
-
-
 
 # Potential Features
   # Deleting players
@@ -26,8 +14,9 @@ require 'sinatra'
 require 'sinatra/reloader' if development?
 require 'sinatra/content_for'
 require 'tilt/erubis'
+require 'redcarpet'
 require 'pry'
-require 'psych'
+require 'yaml'
 
 require_relative "lib/game_data"
 
@@ -117,12 +106,17 @@ def game_data
 end
 
 helpers do
-  def load_gamefile
-    YAML.load_file(File.join(game_save_dir, acquire_gamefile_name))
+  def load_gamefile(gamefile=acquire_gamefile_name)
+    YAML.load_file(File.join(game_save_dir, gamefile))
   end
 
   def active_games
-    Dir.glob("*", base: game_save_dir).map do |filename|
+    in_process_games = Dir.glob("*", base: game_save_dir).select do |file|
+      game_data = load_gamefile(file)
+      game_data[:limericks].all? { |limerick| !limerick.complete? }
+    end
+
+    in_process_games.map do |filename|
       acquire_group_name(filename)
     end
   end
@@ -149,6 +143,13 @@ helpers do
       waiting_on[0..-2].join(", ") + " and " + waiting_on[-1] + " are"
     end
   end
+
+  def render_markdown(file_contents)
+    headers["Content-Type"] = "text/html"
+    markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
+  
+    markdown.render(file_contents)
+  end
 end
 
 get "/" do
@@ -172,7 +173,13 @@ post "/new_game" do
 end
 
 get "/join" do
-  erb :join_game
+  if active_games.empty?
+    session[:message] = "No games available. "\
+                        "Try creating a <a href='/new_game'>new game</a>."
+    redirect "/"
+  else
+    erb :join_game
+  end
 end
 
 post "/join" do
@@ -190,6 +197,10 @@ post "/join" do
     game_data.refresh
     redirect "/play"
   end
+end
+
+get "/rules" do
+  erb :rules
 end
 
 get "/play" do

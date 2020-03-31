@@ -1,8 +1,36 @@
 .splash-message {
-  background-color: orangered;
-  padding: 3px;
+  background-color: coral;
+  padding: 10px;
+  width: auto;
 }
 
 .debugging {
   background-color: red;
+}
+
+.rules {
+  text-align: left;
+  margin: 10px 30px 10px 30px;
+}
+
+#rules-title {
+  text-align: center;
+  text-decoration: underline;
+}
+
+nav {
+  background-color: skyblue;
+  font-family: fantasy;
+}
+
+html {
+  position: relative;
+  left: 25%;
+}
+
+body {
+  float: left;
+  width: 800px;
+
+  text-align: center;
 }

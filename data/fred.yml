@@ -1,22 +1,22 @@
 ---
-:group_name: test4
+:group_name: fred
 :group_size: 2
 :players:
-- owen
-- Steve
+- fred
+- fredd
 :limericks:
 - !ruby/object:Limerick
   lines:
-  - ad
   - asdf
-  - ''
-  - asdf
-  - adsf
+  - red
+  - a
+  - a
+  - a
 - !ruby/object:Limerick
   lines:
+  - red
   - a
-  - asdf
-  - adsf
-  - asdf
-  - asdf
+  - a
+  - a
+  - a
 :current_line: 6

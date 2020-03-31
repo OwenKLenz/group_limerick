@@ -1,5 +1,5 @@
 ---
-:group_name: test3
+:group_name: My Group
 :group_size: 2
 :players:
 - Owen
@@ -7,16 +7,9 @@
 :limericks:
 - !ruby/object:Limerick
   lines:
-  - a
-  - a
-  - a
-  - a
-  - a
+  - There once was a woman named Delores
+  - I like cookies
 - !ruby/object:Limerick
   lines:
-  - a
-  - a
-  - a
-  - a
-  - a
-:current_line: 6
+  - Steve
+:current_line: 2

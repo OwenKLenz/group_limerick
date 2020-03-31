@@ -60,6 +60,12 @@ class GroupLimerickTest < MiniTest::Test
     assert_includes last_response.body, "Names must be one or more characters."
   end
 
+  def test_no_games_available
+    get "/join"
+    assert_equal session[:message], "No games available. Try creating a <a href='/new_game'>new game</a>."
+    assert_equal last_response.status, 302
+  end
+
   def test_create_new_game
     create_test_game
 
@@ -105,7 +111,7 @@ class GroupLimerickTest < MiniTest::Test
     get "/"
     assert_includes last_response.body, '~ <a href="/new_game">New Game</a>'
 
-    get "/join"
+    get "/new_game"
     assert_includes last_response.body, '~ <a href="/new_game">New Game</a>'
   end
 

@@ -1,22 +1,19 @@
 ---
-:group_name: '2'
-:group_size: 5
+:group_name: stebe
+:group_size: 4
 :players:
-- owen
-- hi
-- sldf
-- Alfred
-- Frank
+- p
+- s
+- fe
+- fewfw
 :limericks:
 - !ruby/object:Limerick
+  lines: []
+- !ruby/object:Limerick
+  lines: []
+- !ruby/object:Limerick
+  lines: []
+- !ruby/object:Limerick
   lines:
-  - stuff
-- !ruby/object:Limerick
-  lines: []
-- !ruby/object:Limerick
-  lines: []
-- !ruby/object:Limerick
-  lines: []
-- !ruby/object:Limerick
-  lines: []
+  - a
 :current_line: 1
