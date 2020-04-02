@@ -9,7 +9,7 @@ class GameData
     @gamefile_path = GameData.generate_gamefile_path(group_name)
 
     gamefile_data = YAML.load_file(@gamefile_path)
-    @player_name = player_name.capitalize
+    @player_name = player_name
     @group_name = gamefile_data[:group_name]
     @group_size = gamefile_data[:group_size]
     @players = gamefile_data[:players]

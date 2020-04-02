@@ -41,7 +41,7 @@ def create_gamefile
 
   raw_game_data = { group_name: params[:group_name],
                     group_size: params[:group_size].to_i,
-                    players: [params[:player_name].capitalize],
+                    players: [params[:player_name]],
                     limericks: generate_limericks,
                     current_line: 1 }
   YAML.dump(raw_game_data, gamefile)
@@ -59,7 +59,8 @@ def invalid_join?(raw_game_data)
 end
 
 def set_session_data
-  session[:game_data] = GameData.new(params[:group_name], params[:player_name])
+  session[:game_data] = GameData.new(params[:group_name],
+                                     params[:player_name])
 end
 
 def formatted_gamefile_name

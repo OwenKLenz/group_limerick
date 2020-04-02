@@ -10,14 +10,6 @@
         null,
         null,
         null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
         1,
         1,
         1,
@@ -72,6 +64,7 @@
         null,
         1,
         24,
+        null,
         null,
         null,
         1,
@@ -250,7 +243,6 @@
       "/home/oklenz/learn_to_code/my_projects/group_limerick/lib/game_data.rb": [
         1,
         1,
-        1,
         null,
         1,
         1,
@@ -380,6 +372,6 @@
         null
       ]
     },
-    "timestamp": 1585862030
+    "timestamp": 1585865795
   }
 }

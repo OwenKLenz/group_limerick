@@ -167,6 +167,6 @@ class GroupLimerickTest < MiniTest::Test
   def test_rules
     get "/rules"
     assert_equal last_response.status, 200
-    assert_includes last_response.body, "<li><p>Group Limerick is played with a group of 2-5 players.</p></li>"
+    assert_includes last_response.body, "<li><p>Group Limerick is played with a group of 2-5 players"
   end
 end
