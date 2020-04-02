@@ -1,0 +1,30 @@
+---
+:group_name: One
+:group_size: 3
+:players:
+- Owen
+- Steve
+- Joe
+:limericks:
+- !ruby/object:Limerick
+  lines:
+  - Fred
+  - fdsf
+  - adsf
+  - fg
+  - fd
+- !ruby/object:Limerick
+  lines:
+  - Fred
+  - hi
+  - gf
+  - fdsa
+  - fds
+- !ruby/object:Limerick
+  lines:
+  - hi
+  - fe
+  - sdsa
+  - fdfe
+  - dse
+:current_line: 6

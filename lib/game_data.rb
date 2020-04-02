@@ -70,11 +70,6 @@ class GameData
     write_to_gamefile
   end
 
-  def set_game_complete
-    unless 
-    write_to_gamefile
-  end
-
   def refresh
     initialize(@group_name, @player_name)
   end

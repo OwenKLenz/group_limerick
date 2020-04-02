@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>jQuery Crash Course | Selectors</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <style>
+      body {
+        font-size: 17px;
+        font-family: arial;
+        background: lightgrey;
+        line-height: 1.5em;
+      }
+
+      header {
+        background: #333;
+        color: #fff
+        padding: 20px;
+        text-align: center;
+        border-bottom: 4px #000 solid;
+        margin-bottom: 10px;
+      }
+
+      #container {
+        width: 90%;
+        margin: auto;
+        padding: 10px;
+      }
+
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>jQuery Crash Course</h1>
+      <div id="container">
+        <h3>Mouse Events</h3>
+          <button id="btn1">Button 1</button>
+          <button id="btn2">Button 2</button>
+          <p id="para1">Typically, the first two lines rhyme with each other, the third and fourth rhyme together, and the fifth line either repeats the first line or rhymes with it. The limerick's [anapestic](https://en.wikipedia.org/wiki/Anapaest) rhythm is created by an accentual pattern that contains many sets of double weakly-stressed syllables. The pattern can be illustrated with dashes denoting weak syllables, and back-slashes for stresses</p>
+      </div>
+    </header>
+
+    <script>
+      $(document).ready(function(){
+        $('#btn1').click(function(){
+          $('#para1').hide();
+        });
+
+        $('#btn2').click(function(){
+          $('#para1').show();
+        });
+
+
+      });
+
+    </script>
+  </body>
+</html>

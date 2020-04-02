@@ -8,6 +8,8 @@
   # Passwords to enter games? (probably unnecessary)
   # Changing names
   # Displaying who came up with which line?
+  # Download completed limericks feature
+  # 
 
 require 'bundler/setup'
 require 'sinatra'
@@ -113,7 +115,8 @@ helpers do
   def active_games
     in_process_games = Dir.glob("*", base: game_save_dir).select do |file|
       game_data = load_gamefile(file)
-      game_data[:limericks].all? { |limerick| !limerick.complete? }
+      game_data[:limericks].any? { |limerick| !limerick.complete? }
+      true
     end
 
     in_process_games.map do |filename|

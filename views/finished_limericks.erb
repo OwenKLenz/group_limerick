@@ -1,5 +1,22 @@
 <h2>Finished Limericks</h2>
 <% game_data.limericks.each.with_index do |limerick, index| %>
   <h3>Started by <%= game_data.players[index] %></h3>
-  <p><em><%== limerick %></em></p>
+  <p id="limerick<%== index %>"><em><%== limerick %></em></p>
+  <button id="show-limerick-<%== index %>">Reveal Limerick</button>
+    <script>
+    $(document).ready(function(){
+      $("#limerick<%== index %>").hide();
+
+      $("#show-limerick-<%== index %>").click(function(){
+        $("#limerick<%== index %>").show(500);
+        $("#show-limerick-<%== index %>").hide();
+      });
+    });
+  </script>
 <% end %>
+
+  <script>
+//   $(document).ready(function){
+//     $
+//   }
+// </script>

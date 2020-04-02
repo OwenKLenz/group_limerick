@@ -18,19 +18,85 @@
   text-decoration: underline;
 }
 
-nav {
-  background-color: skyblue;
-  font-family: fantasy;
+a {
+  color:silver;
 }
 
+nav {
+  color: silver;
+  font-size: 25px;
+  margin: 10px;
+  font-weight: bold;
+  font-family: 'Times New Roman', Times, serif, sans-serif;
+}
+
+.nav-item {
+  color: silver;
+  padding: 5px;
+  border-width: 5px;
+  border-style: outset;
+  border-color: blueviolet;
+  background-color: rgba(97, 44, 151, 0.315);
+}
 html {
-  position: relative;
-  left: 25%;
+  background-color: whitesmoke;
 }
 
 body {
+  position: relative;
+  left: 25%;
+  background-color: rgba(0, 0, 255, 0.733);
+  color: silver;
+  font-family: 'Times New Roman';
+  font-size: 1.5em;
+
+  border: 8px;
+  border-style: ridge;
+  border-color: teal;
   float: left;
   width: 800px;
-
   text-align: center;
+}
+
+#nav-div {
+  background-color: rgb(124, 28, 219);
+  padding: 1mm;
+  border-bottom-style: ridge;
+  border-bottom-width: 2px;
+  border-bottom-color: azure;
+}
+
+.title {
+  font-family: 'Times New Roman', Times, serif;
+  font-style: oblique;
+}
+
+#group_name {
+  height: 24px;
+  background-color: rgba(70, 149, 180, 0.342);
+  color:rgb(168, 166, 166);
+  font-size: 20px;
+}
+
+input {
+  background-color: rgba(70, 149, 180, 0.342);
+}
+
+button {
+  margin: 2px;
+  background-color: rgba(172, 255, 47, 0);
+  color:silver;
+  font-weight: bold;
+}
+
+#copyright {
+  font-size: 16;
+}
+
+.game-button {
+  border: ridge;
+  border-width: 4px;
+  border-color: rgba(192, 192, 192, 0.39);
+  padding: 4px;
+
 }
