@@ -2,17 +2,17 @@
 <form action="/join" method="post">
   <div>
     <label for="group_name">Available Games:</label>
-    <select id="group_name" name="group_name">
+    <select class="text-input" id="group_name" name="group_name">
       <% active_games.each do |game| %>
-        <option id="group_name" value="<%= game %>" <%= set_selected(game) %>><%= game %></option>
+        <option id="group_name" class="text-input" value="<%= game %>" <%= last_selection(game) %>><%= game %></option>
       <% end %>
     </select>
   </div>
   <div>
   <label for="player_name">Your name:</label>
-    <input type="text" id="player_name" name="player_name" value="<%= params[:player_name] %>"/>
+    <input type="text" id="player_name" class="text-input" name="player_name" value="<%= params[:player_name] %>"/>
   </div>
   <div>
-    <button type="submit">Join</button>
+    <button class="game-button" type="submit">Join</button>
   </div>
 </form>

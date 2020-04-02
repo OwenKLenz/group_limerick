@@ -1,22 +1,22 @@
 ---
-:group_name: fred
+:group_name: test
 :group_size: 2
 :players:
-- fred
-- fredd
+- Owen
+- Steve
 :limericks:
 - !ruby/object:Limerick
   lines:
-  - asdf
-  - red
-  - a
-  - a
+  - hi
+  - hello
+  - crackers
+  - peas
   - a
 - !ruby/object:Limerick
   lines:
-  - red
-  - a
-  - a
-  - a
-  - a
+  - one
+  - goodbye
+  - cheese
+  - carrots
+  - b
 :current_line: 6

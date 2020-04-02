@@ -1,0 +1,11 @@
+---
+:group_name: ".abc"
+:group_size: 2
+:players:
+- adsf
+:limericks:
+- !ruby/object:Limerick
+  lines: []
+- !ruby/object:Limerick
+  lines: []
+:current_line: 1

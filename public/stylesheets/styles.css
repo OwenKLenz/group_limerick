@@ -1,5 +1,5 @@
 .splash-message {
-  background-color: coral;
+  background-color: rgba(0, 255, 255, 0.507);
   padding: 10px;
   width: auto;
 }
@@ -27,7 +27,6 @@ nav {
   font-size: 25px;
   margin: 10px;
   font-weight: bold;
-  font-family: 'Times New Roman', Times, serif, sans-serif;
 }
 
 .nav-item {
@@ -40,6 +39,7 @@ nav {
 }
 html {
   background-color: whitesmoke;
+  font-family: 'Times New Roman', Times, sans-serif;
 }
 
 body {
@@ -47,7 +47,6 @@ body {
   left: 25%;
   background-color: rgba(0, 0, 255, 0.733);
   color: silver;
-  font-family: 'Times New Roman';
   font-size: 1.5em;
 
   border: 8px;
@@ -66,15 +65,9 @@ body {
   border-bottom-color: azure;
 }
 
-.title {
-  font-family: 'Times New Roman', Times, serif;
-  font-style: oblique;
-}
-
-#group_name {
+.text-input {
   height: 24px;
   background-color: rgba(70, 149, 180, 0.342);
-  color:rgb(168, 166, 166);
   font-size: 20px;
 }
 
@@ -82,21 +75,20 @@ input {
   background-color: rgba(70, 149, 180, 0.342);
 }
 
-button {
-  margin: 2px;
-  background-color: rgba(172, 255, 47, 0);
-  color:silver;
-  font-weight: bold;
-}
-
 #copyright {
   font-size: 16;
 }
 
 .game-button {
+  margin: 3px;
+  padding: 4px;
+  color:silver;
+  background-color: rgba(255, 0, 0, 0.767);
   border: ridge;
   border-width: 4px;
-  border-color: rgba(192, 192, 192, 0.39);
-  padding: 4px;
-
+  border-style: outset;
+  border-color: red;
+  font-weight: bold;
+  font-size: 20px;
+  text-decoration: none;
 }

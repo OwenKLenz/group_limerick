@@ -1,0 +1,13 @@
+---
+:group_name: Hello
+:group_size: 2
+:players:
+- O.a
+- Che  a
+:limericks:
+- !ruby/object:Limerick
+  lines: []
+- !ruby/object:Limerick
+  lines:
+  - adsf
+:current_line: 1

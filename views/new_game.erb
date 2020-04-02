@@ -3,18 +3,18 @@
 <form action="/new_game" method="post">
   <div>
     <label for="group_name">Enter a group name:</label>
-      <input type="text" id="group_name" name="group_name" size="30" value="<%= params[:group_name] || GROUP_NAMES.sample %>">
+      <input type="text" class="text-input" name="group_name" size="30" value="<%= params[:group_name] %>">
     </label>
   </div>
   <div>
-    <label for="total_players">How many people are playing? (Max: 5)</label>
-      <input type="number" id="total_players" step="1" name="group_size" size="2" max="5" min="2" value="<%= params[:group_size] || 2 %>" required>
+    <label for="total_players">How many people are playing? (2-5)</label>
+      <input type="number" class="text-input" id="total_players" step="1" name="group_size" size="2" max="5" min="2" value="<%= params[:group_size] || 2 %>" required>
     </label>
   </div>
   <div>
     <label for="player_name">What is your name?</label>
-      <input type="text" id="player_name" step="1" name="player_name" size="30" value="<%= params[:player_name] %>">
+      <input type="text" class="text-input"  id="player_name" step="1" name="player_name" size="30" value="<%= params[:player_name] %>">
     </label>
   </div>
-  <button type="submit">Create Game</button>
+  <button type="submit" class="game-button">Create Game</button>
 </form>

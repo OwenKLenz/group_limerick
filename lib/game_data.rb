@@ -1,16 +1,15 @@
 require 'yaml'
-require 'pry'
-
 require_relative "limerick"
 
 class GameData
-  attr_reader :players, :limericks, :group_size, :group_name, :player_name, :gamefile_path, :current_line
+  attr_reader :players, :limericks, :group_size, :group_name,
+              :player_name, :gamefile_path, :current_line
 
   def initialize(group_name, player_name)
     @gamefile_path = GameData.generate_gamefile_path(group_name)
 
     gamefile_data = YAML.load_file(@gamefile_path)
-    @player_name = player_name
+    @player_name = player_name.capitalize
     @group_name = gamefile_data[:group_name]
     @group_size = gamefile_data[:group_size]
     @players = gamefile_data[:players]
@@ -24,8 +23,22 @@ class GameData
                    current_line: @current_line }
   end
 
-  def self.load_gamefile(group_name)
-    YAML.load_file(self.generate_gamefile_path(group_name))
+  def self.generate_gamefile_path(group_name)
+    file_name = group_name.downcase.tr(" ", "_") + ".yml"
+    File.join(GameData.game_save_dir, file_name)
+  end
+
+  def self.game_save_dir
+    if ENV["RACK_ENV"] == "test"
+      File.expand_path("../../test/data", __FILE__)
+    else
+      File.expand_path("../../data", __FILE__)
+    end
+  end
+
+  def write_to_gamefile
+    formatted_data = YAML.dump(@game_data)
+    File.write(@gamefile_path, formatted_data)
   end
 
   def cycle_limericks
@@ -40,8 +53,8 @@ class GameData
     @limericks.all? { |limerick| limerick.size == @current_line }
   end
 
-  def current_line_submitted?
-    current_limerick.size == @current_line
+  def current_line_not_submitted?
+    current_limerick.size < @current_line
   end
 
   def current_limerick
@@ -54,11 +67,9 @@ class GameData
     @limericks.all?(&:complete?)
   end
 
-  def add_player(player_name, group_name)
+  def add_player
     refresh
-
-    @players << player_name
-    @limericks << Limerick.new
+    @players << @player_name
 
     write_to_gamefile
   end
@@ -74,42 +85,12 @@ class GameData
     initialize(@group_name, @player_name)
   end
 
-  def to_s # for debugging
-    "<strong>Group Name:</strong> #{@group_name}<br><strong>Group Size:</strong> #{@group_size}<br>"\
-    "<strong>Players:</strong> #{@players}<br><strong>Limericks:</strong> #{@limericks}<br>"\
+  # For in app debugging
+  def to_s
+    "<strong>Group Name:</strong> #{@group_name}<br><strong>Group"\
+    "Size:</strong> #{@group_size}<br><strong>Players:</strong> #{@players}"\
+    "<br><strong>Limericks:</strong> #{@limericks}<br>"\
     "<strong>File Path:</strong>#{@gamefile_path}<br>"\
     "<strong>Current Line:</strong>#{@current_line}"
   end
-
-  def self.generate_gamefile_path(group_name)
-    file_name = group_name.downcase.gsub(" ", "_") + ".yml"
-    File.join(GameData.game_save_dir, file_name)
-  end
-
-  private
-
-  def write_to_gamefile
-    formatted_data = YAML.dump(@game_data)
-    File.write(@gamefile_path, formatted_data)
-  end
-
-  def self.game_save_dir
-    if ENV["RACK_ENV"] == "test"
-      File.expand_path("../../test/data", __FILE__)
-    else
-      File.expand_path("../../data", __FILE__)
-    end
-  end
 end
-
-# Testing GameData objects
-
-# p YAML.load_file("../data/test.yml")
-
-# data = GameData.new({:group_name=>"test", :group_size=>5, :players=>["owen", "Steve"], :limericks=>[]})
-
-# data.add_player("Fred")
-# data.update_gamefile
-# p data
-
-# p YAML.load_file("../data/test.yml")

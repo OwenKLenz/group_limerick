@@ -1,12 +1,16 @@
 ## How to Play
 
-- Group Limerick is played with a group of 2-5 players. 
+- Group Limerick is played with a group of 2-5 players, preferably with the aid of a voice or video chat app such as [Skype](https://www.skype.com/en/) or [Zoom](https://zoom.us/). This way, slower players can be heckled mercilessly for taking too long to come up with their next line. Additionally, the often inane and innapropriate results can be enjoyed together.
 
-- The game begins with each player crafting the first line of a limerick. 
+- After assembling a group, one player should create a [new game](/new_game).
 
-- Once each player has finished their line, limericks are passed around to a new player who writes the 2nd line, and so on until all limericks are complete. 
+- Once created, other players can [join](/join) the game.
 
-- The game is best played over group voice or video chat so that slower players can be heckled mercilessly for taking too long to come up with their next line. Additionally, the often inane and innapropriate results can be enjoyed together.
+- After all players have joined and the group is full, press the refresh button to enter the first limerick line.
+
+- Once each player has finished their line, each limerick is passed around to a new player who writes the 2nd line.
+
+- Rinse and repeat until all limericks are complete.
 
 ## About the Limerick
 
