@@ -132,7 +132,7 @@ class GroupLimerickTest < MiniTest::Test
     post "/join", { group_name: "Test Group 1", player_name: "test player 2" }
 
     get last_response["Location"]
-    assert_includes last_response.body, "Enter first line:"
+    assert_includes last_response.body, "Enter the first line:"
   end
 
   def test_waiting_for_other_player_submissions
