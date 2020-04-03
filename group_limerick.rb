@@ -43,6 +43,7 @@ def gamefile_path
 end
 
 def create_gamefile
+  FileUtils.mkdir("data") unless File.exist?("data")
 
   gamefile = File.new(gamefile_path, 'w')
 
