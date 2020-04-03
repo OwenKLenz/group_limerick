@@ -45,6 +45,7 @@ html {
 body {
   position: relative;
   left: 25%;
+  right: 25%;
   background-color: rgba(0, 0, 255, 0.733);
   color: silver;
   font-size: 1.5em;
@@ -53,7 +54,10 @@ body {
   border-style: ridge;
   border-color: teal;
   float: left;
-  width: 800px;
+  width: 50%;
+  min-width: 670px;
+  
+  margin: auto;
   text-align: center;
 }
 
@@ -77,6 +81,7 @@ input {
 
 #copyright {
   font-size: 16px;
+  padding-bottom: 10px;
 }
 
 .game-button {
