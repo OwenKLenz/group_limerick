@@ -1,7 +1,7 @@
 require "simplecov"
 SimpleCov.start
 
-ENV["RACK_ENV"] = "test"
+ENV["RACK_ENV"] = "testes"
 
 require "minitest/autorun"
 require "rack/test"

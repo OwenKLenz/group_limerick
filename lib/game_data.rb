@@ -5,8 +5,8 @@ class GameData
   attr_reader :players, :limericks, :group_size, :group_name,
               :player_name, :gamefile_path, :current_line
 
-  def initialize(group_name, player_name)
-    @gamefile_path = GameData.generate_gamefile_path(group_name)
+  def initialize(group_name, player_name, gamefile_path)
+    @gamefile_path = gamefile_path
 
     gamefile_data = YAML.load_file(@gamefile_path)
     @player_name = player_name
@@ -21,19 +21,6 @@ class GameData
                    players: @players,
                    limericks: @limericks,
                    current_line: @current_line }
-  end
-
-  def self.generate_gamefile_path(group_name)
-    file_name = group_name.downcase.tr(" ", "_") + ".yml"
-    File.join(GameData.game_save_dir, file_name)
-  end
-
-  def self.game_save_dir
-    if ENV["RACK_ENV"] == "test"
-      File.expand_path("../../test/data", __FILE__)
-    else
-      File.expand_path("../../data", __FILE__)
-    end
   end
 
   def write_to_gamefile
@@ -82,7 +69,7 @@ class GameData
   end
 
   def refresh
-    initialize(@group_name, @player_name)
+    initialize(@group_name, @player_name, @gamefile_path)
   end
 
   # For in app debugging

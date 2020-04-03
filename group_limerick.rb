@@ -38,16 +38,20 @@ def game_save_dir
   end
 end
 
+def gamefile_path
+  File.join(game_save_dir, formatted_gamefile_name)
+end
+
 def create_gamefile
-  # binding.pry
-  gamefile =
-    File.new(File.join(game_save_dir, formatted_gamefile_name), 'w')
+
+  gamefile = File.new(gamefile_path, 'w')
 
   raw_game_data = { group_name: params[:group_name],
                     group_size: params[:group_size].to_i,
                     players: [params[:player_name]],
                     limericks: generate_limericks,
                     current_line: 1 }
+
   YAML.dump(raw_game_data, gamefile)
   gamefile.close
 end
@@ -64,7 +68,8 @@ end
 
 def set_session_data
   session[:game_data] = GameData.new(params[:group_name],
-                                     params[:player_name])
+                                     params[:player_name],
+                                     gamefile_path)
 end
 
 def formatted_gamefile_name
@@ -83,7 +88,7 @@ end
 def invalid_group_name?
   if params[:group_name].empty?
     session[:message] = "Group names must be one or more characters"
-  elsif File.file?(File.join(GameData.game_save_dir, formatted_gamefile_name))
+  elsif File.file?(File.join(game_save_dir, formatted_gamefile_name))
     session[:message] = "Group name already in use."
   elsif params[:group_name] =~ /([^\w\s]|\A\s)/
     session[:message] = "Group names must begin with an alphanumeric character"
@@ -103,7 +108,7 @@ def game_data
 end
 
 def collect_in_progress_games
-  Dir.glob("*", base: GameData.game_save_dir).select do |file|
+  Dir.glob("*", base: game_save_dir).select do |file|
     game_data = load_gamefile(file)
     game_data[:limericks].any? { |limerick| !limerick.complete? }
   end
@@ -116,7 +121,7 @@ def generate_limericks
 end
 
 def load_gamefile(gamefile=formatted_gamefile_name)
-  YAML.load_file(File.join(GameData.game_save_dir, gamefile))
+  YAML.load_file(File.join(game_save_dir, gamefile))
 end
 
 helpers do
