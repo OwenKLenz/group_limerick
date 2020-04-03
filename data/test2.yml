@@ -1,0 +1,24 @@
+---
+:group_name: Test2
+:group_size: 2
+:players:
+- Owen
+- Joe
+:limericks:
+- !ruby/object:Limerick
+  lines:
+  - There once was a limerick named Roderick
+  - There once was a limerick named Roderick
+  - There once was a limerick named Roderick
+  - There once was a badger named Codsworth the mighty
+  - "There once was a badger named Codsworth the mighty\r\nThere once was a badger
+    named Codsworth the mighty"
+- !ruby/object:Limerick
+  lines:
+  - There once was a limerick named Roderick
+  - There once was a limerick named Roderick
+  - There once was a limerick named Roderick
+  - "In a hole in the ground lived a hobbit\r\n"
+  - There once was a badger named Codsworth the mightyThere once was a badger named
+    Codsworth the mighty
+:current_line: 6

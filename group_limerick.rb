@@ -229,8 +229,8 @@ get "/play" do
 end
 
 post "/submit" do
-  if params[:new_line].empty?
-    session[:message] = "It's not going to be much of a limerick if you leave"\
+  if params[:new_line].strip.empty?
+    session[:message] = "It's not going to be much of a limerick if you leave "\
                         "the line blank. <br>Try reading the "\
                         "<a href='/rules'>rules</a> if you need help."
     status 422
