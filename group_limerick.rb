@@ -5,6 +5,9 @@
 #   Displaying who came up with which line?
 #   Download completed limericks feature
 #   Possibly more Jquery features (autoreloading?, animating buttons?)
+#   Getting the favicon to show up
+#   Removing finished or at least allowing them to be overwritten when the same
+#     name is entered
 
 require 'bundler/setup'
 require 'sinatra'

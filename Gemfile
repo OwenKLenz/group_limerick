@@ -10,7 +10,6 @@ gem 'pry'
 gem 'pry-byebug'
 gem 'rake'
 gem 'redcarpet'
-gem 'rubocop', '0.46.0'
 gem 'simplecov'
 
 group :production do
