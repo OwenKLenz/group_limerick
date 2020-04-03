@@ -1,4 +1,14 @@
-<audio src="audio/jeopardy.mp3" type="audio/mpeg" autoplay loop></audio>
+<div id="refresh">
+  <audio src="audio/jeopardy.mp3" type="audio/mpeg" autoplay loop></audio>
 
-<h3><%= format_unfinished_players %> taking their sweet time...</h3>
-<a class="game-button" href="/play">Refresh</a>
+  <h3><%= format_unfinished_players %> taking their sweet time...</h3>
+  <a class="game-button" href="/play">Refresh</a>
+</div>
+
+<script>
+  $(document).ready(function(){
+    setInterval(function(){
+      location.reload(true);
+    }, 14600);
+  });
+</script>

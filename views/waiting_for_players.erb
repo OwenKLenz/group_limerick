@@ -3,3 +3,11 @@
 <p>Players: <%= game_data.players.join(", ") %></p>
 
 <a class="game-button" href="/play">Refresh</a>
+
+<script>
+  $(document).ready(function(){
+    setInterval(function(){
+      location.reload(true);
+    }, 14000);
+  });
+</script>
