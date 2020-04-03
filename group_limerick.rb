@@ -214,7 +214,16 @@ post "/join" do
   end
 end
 
+def handle_invalid_access
+  if !game_data
+    session[:message] = "I'm not sure how you got here, but welcome!"
+    redirect "/"
+  end
+end
+
 get "/play" do
+  handle_invalid_access
+
   game_data.refresh
 
   if game_data.players.size < game_data.group_size
@@ -244,4 +253,9 @@ end
 
 get "/rules" do
   erb :rules
+end
+
+not_found do
+  session[:message] = "I'm not sure how you got here, but welcome!"
+  redirect "/"
 end
