@@ -15,7 +15,7 @@ require 'sinatra/reloader' if development?
 require 'sinatra/content_for'
 require 'tilt/erubis'
 require 'redcarpet'
-require 'pry' if development?
+require 'pry' # if development?
 require 'yaml'
 
 require_relative "lib/game_data"
@@ -39,8 +39,9 @@ def game_save_dir
 end
 
 def create_gamefile
+  # binding.pry
   gamefile =
-    File.new(File.join(GameData.game_save_dir, formatted_gamefile_name), 'w')
+    File.new(File.join(game_save_dir, formatted_gamefile_name), 'w')
 
   raw_game_data = { group_name: params[:group_name],
                     group_size: params[:group_size].to_i,
