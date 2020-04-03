@@ -1,6 +1,6 @@
 <h2>Waiting for players to join</h2>
 <h3><%= "#{game_data.players.size} of #{game_data.group_size} players have joined" %></h3>
-<p>Players: <%= game_data.players.join(", ") %></p>
+<p>Current Players: <%= game_data.players.join(", ") %></p>
 
 <a class="game-button" href="/play">Refresh</a>
 
@@ -8,6 +8,6 @@
   $(document).ready(function(){
     setInterval(function(){
       location.reload(true);
-    }, 14000);
+    }, 10000);
   });
 </script>
