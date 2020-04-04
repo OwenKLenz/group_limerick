@@ -10,3 +10,6 @@ desc "Run tests"
 task :test do
   system 'bundle exec ruby test/group_limerick_test.rb'
 end
+
+desc "Delete all gamefiles and run tests"
+task :default => [:reset, :test]

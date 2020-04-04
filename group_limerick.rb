@@ -15,7 +15,6 @@
 require 'bundler/setup'
 require 'sinatra'
 require 'sinatra/reloader' if development?
-require 'sinatra/content_for'
 require 'tilt/erubis'
 require 'redcarpet'
 require 'pry' # if development?
@@ -126,6 +125,13 @@ def load_gamefile(gamefile=formatted_gamefile_name)
   YAML.load_file(File.join(game_save_dir, gamefile))
 end
 
+def handle_invalid_page_access
+  if !game_data
+    session[:message] = "I'm not sure how you got here, but welcome!"
+    redirect "/"
+  end
+end
+
 helpers do
   def active_games
     in_progress_games = collect_in_progress_games
@@ -166,6 +172,7 @@ helpers do
   end
 end
 
+# Routes:
 get "/" do
   erb :index
 end
@@ -215,15 +222,8 @@ post "/join" do
   end
 end
 
-def handle_invalid_access
-  if !game_data
-    session[:message] = "I'm not sure how you got here, but welcome!"
-    redirect "/"
-  end
-end
-
 get "/play" do
-  handle_invalid_access
+  handle_invalid_page_access
 
   game_data.refresh
 
