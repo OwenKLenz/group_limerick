@@ -9,9 +9,6 @@
 #   Removing finished or at least allowing them to be overwritten when the same
 #     name is entered
 
-#  A mute button
-#  allowing !, etc.
-
 require 'bundler/setup'
 require 'sinatra'
 require 'sinatra/reloader' if development?
