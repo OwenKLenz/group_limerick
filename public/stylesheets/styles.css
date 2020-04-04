@@ -97,3 +97,9 @@ input {
   font-size: 20px;
   text-decoration: none;
 }
+
+#mute {
+  position: absolute;
+  right: 3px;
+  top: 60px;
+}

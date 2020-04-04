@@ -9,6 +9,9 @@
 #   Removing finished or at least allowing them to be overwritten when the same
 #     name is entered
 
+#  A mute button
+#  allowing !, etc.
+
 require 'bundler/setup'
 require 'sinatra'
 require 'sinatra/reloader' if development?
@@ -20,7 +23,7 @@ require 'yaml'
 
 require_relative "lib/game_data"
 
-LINE_NAMES = %w(first second third fourth fifth)
+NUMBERS = %w(first second third fourth fifth)
 
 configure do
   enable :sessions
@@ -61,16 +64,14 @@ def invalid_join?(raw_game_data)
   if invalid_player_name?
     true
   elsif raw_game_data[:players].size >= raw_game_data[:group_size].to_i
-      session[:message] = "The group \"#{raw_game_data[:group_name]}\" is "\
+    session[:message] = "The group \"#{raw_game_data[:group_name]}\" is "\
                           "already full. No new players may join."
     true
   end
 end
 
 def set_session_data
-  session[:game_data] = GameData.new(params[:group_name],
-                                     params[:player_name],
-                                     gamefile_path)
+  session[:game_data] = GameData.new(params[:player_name], gamefile_path)
 end
 
 def formatted_gamefile_name
@@ -87,12 +88,12 @@ end
 # rubocop:enable MultilineMethodCallIndentation
 
 def invalid_group_name?
-  if params[:group_name].empty?
+  if params[:group_name].strip.empty?
     session[:message] = "Group names must be one or more characters"
+  elsif params[:group_name] =~ /\A[^\w]/
+    session[:message] = "Group names must begin with an alphanumeric character"
   elsif File.file?(File.join(game_save_dir, formatted_gamefile_name))
     session[:message] = "Group name already in use."
-  elsif params[:group_name] =~ /([^\w\s]|\A\s)/
-    session[:message] = "Group names must begin with an alphanumeric character"
   end
 end
 
@@ -246,13 +247,20 @@ post "/submit" do
     erb :line_entry
   else
     game_data.add_line(params[:new_line])
-    game_data.cycle_limericks if game_data.all_player_lines_submitted?
+
+    game_data.cycle_limericks if game_data.all_player_lines_submitted? &&
+                                 !game_data.all_limericks_complete?
     redirect "/play"
   end
 end
 
 get "/rules" do
   erb :rules
+end
+
+post "/mute" do
+  game_data.toggle_mute
+  redirect "/play"
 end
 
 not_found do

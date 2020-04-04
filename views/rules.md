@@ -2,7 +2,7 @@
 
 - Group Limerick is played with a group of 2-5 players, preferably with the aid of a voice or video chat app such as [Skype](https://www.skype.com/en/) or [Zoom](https://zoom.us/). This way, slower players can be heckled mercilessly for taking too long to come up with their next line. Additionally, the often inane and innapropriate results can be enjoyed together.
 
-- After assembling a group, one player should create a [new game](/new_game).
+- After assembling a group of friends, one player should create a [new game](/new_game).
 
 - Once created, other players can [join](/join) the game.
 

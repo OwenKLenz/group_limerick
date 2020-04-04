@@ -3,9 +3,9 @@ require_relative "limerick"
 
 class GameData
   attr_reader :players, :limericks, :group_size, :group_name,
-              :player_name, :gamefile_path, :current_line
+              :player_name, :gamefile_path, :current_line, :mute
 
-  def initialize(group_name, player_name, gamefile_path)
+  def initialize(player_name, gamefile_path, mute=false)
     @gamefile_path = gamefile_path
 
     gamefile_data = YAML.load_file(@gamefile_path)
@@ -15,6 +15,7 @@ class GameData
     @players = gamefile_data[:players]
     @limericks = gamefile_data[:limericks]
     @current_line = gamefile_data[:current_line]
+    @mute = mute
 
     @game_data = { group_name: @group_name,
                    group_size: @group_size,
@@ -54,6 +55,10 @@ class GameData
     @limericks.all?(&:complete?)
   end
 
+  def toggle_mute
+    @mute = !@mute
+  end
+
   def add_player
     refresh
     @players << @player_name
@@ -69,7 +74,7 @@ class GameData
   end
 
   def refresh
-    initialize(@group_name, @player_name, @gamefile_path)
+    initialize(@player_name, @gamefile_path, @mute)
   end
 
   # For in app debugging

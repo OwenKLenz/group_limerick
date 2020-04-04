@@ -1,5 +1,8 @@
 <div id="refresh">
-  <audio src="audio/jeopardy.mp3" type="audio/mpeg" autoplay loop></audio>
+  <audio src="audio/jeopardy.mp3" type="audio/mpeg" autoplay loop <%== "muted" if game_data.mute %>></audio>
+  <form action="/mute" method="post">
+    <button id="mute" class="game-button"><%== game_data.mute ? "Unmute" : "Mute" %></button>
+  </form>
 
   <h3><%= format_unfinished_players %> taking their sweet time...</h3>
   <a class="game-button" href="/play">Refresh</a>

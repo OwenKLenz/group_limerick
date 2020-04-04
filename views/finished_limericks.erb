@@ -1,8 +1,12 @@
 <h2>Finished Limericks</h2>
 <% game_data.limericks.each.with_index do |limerick, index| %>
-  <h3>~Started by <%= game_data.players[index] %>~</h3>
-  <p id="limerick<%== index %>"><em><%== limerick %></em></p>
-  <button class="game-button" id="show-limerick-<%== index %>">Reveal Limerick</button>
+  <p><strong><%== "~#{NUMBERS[index].capitalize} Limerick~" %></strong></p>
+  <div id="limerick<%== index %>">
+    <p><em><%== limerick %></em></p>
+  </div>
+    <p><button class="game-button" id="show-limerick-<%== index %>">Reveal</button></p>
+
+
     <script>
     $(document).ready(function(){
       $("#limerick<%== index %>").hide();

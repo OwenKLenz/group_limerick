@@ -6,7 +6,7 @@
   <% end %>
 </div>
 <form action="/submit" method="post" autocomplete="off">
-  <label for="new_line"><strong>Enter the <%= LINE_NAMES[game_data.current_limerick.size] %> line:</strong></label>
+  <label for="new_line"><strong>Enter the <%= NUMBERS[game_data.current_limerick.size] %> line:</strong></label>
   <br>
   <textarea class="text-input" id="new_line" name="new_line" rows=2 cols=40/></textarea>
   <br><button class="game-button" type="submit">Submit</button>
