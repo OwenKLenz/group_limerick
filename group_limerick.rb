@@ -108,7 +108,8 @@ end
 def collect_in_progress_games
   Dir.glob("*", base: game_save_dir).select do |file|
     game_data = load_gamefile(file)
-    game_data[:limericks].any? { |limerick| !limerick.complete? }
+    game_data[:limericks]
+    # game_data[:limericks].any? { |limerick| !limerick.complete? }
   end
 end
 

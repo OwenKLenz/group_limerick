@@ -1,0 +1,22 @@
+---
+:group_name: f
+:group_size: 2
+:players:
+- d
+- f
+:limericks:
+- !ruby/object:Limerick
+  lines:
+  - '1'
+  - '12'
+  - dssd
+  - df
+  - d
+- !ruby/object:Limerick
+  lines:
+  - f
+  - '2'
+  - '123'
+  - ds
+  - fd
+:current_line: 5
