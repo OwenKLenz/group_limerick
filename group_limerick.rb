@@ -19,7 +19,7 @@ require 'yaml'
 
 require_relative "lib/game_data"
 
-NUMBERS = %w(first second third fourth fifth)
+NUMBERS = %w(first second third fourth fifth sixth seventh eighth)
 
 configure do
   enable :sessions

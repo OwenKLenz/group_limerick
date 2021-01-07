@@ -1,5 +1,7 @@
 # Group Limerick
 
+**[Play Here!](https://group-limerick.herokuapp.com/)**
+
 ## Preface
 
 I built this game as an optional side project at the end of [Launch School](https://launchschool.com/)'s RB175 course on designing Networked Applications.

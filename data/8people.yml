@@ -1,0 +1,70 @@
+---
+:group_name: 8People
+:group_size: 8
+:players:
+- Owen1
+- Owen2
+- Owen3
+- Owen4
+- Owen5
+- Owen6
+- Owen7
+- Owen8
+:limericks:
+- !ruby/object:Limerick
+  lines:
+  - "Owen5\r\n"
+  - Owen6
+  - Owen7
+  - Owen8
+  - Owen1
+- !ruby/object:Limerick
+  lines:
+  - Owen6
+  - Owen7
+  - Owen8
+  - Owen1
+  - OPwen2
+- !ruby/object:Limerick
+  lines:
+  - Owen7
+  - Owen8
+  - Owen1
+  - Owen2
+  - Owen3
+- !ruby/object:Limerick
+  lines:
+  - Owen8
+  - Owen1
+  - Owen2
+  - Owen3
+  - Owen4
+- !ruby/object:Limerick
+  lines:
+  - Owen1
+  - Owen2
+  - Owen3
+  - Owen4
+  - Owen5
+- !ruby/object:Limerick
+  lines:
+  - Owen2
+  - Owen3
+  - Owen4
+  - Owen5
+  - Owen6
+- !ruby/object:Limerick
+  lines:
+  - Owen3
+  - Owen4
+  - Owen5
+  - Owen6
+  - Owen7
+- !ruby/object:Limerick
+  lines:
+  - Owen4
+  - "Owen5\r\n"
+  - Owen6
+  - Owen7
+  - Owen8
+:current_line: 5
